@@ -20,6 +20,8 @@
   const templates = {
     bookTemplate: Handlebars.compile(document.querySelector(select.templateOf.Book).innerHTML),
   };
+
+  const favoriteBooks = [];
     
   class Book {
     constructor(data) {
@@ -57,7 +59,8 @@
       const thisBook = this;
       thisBook.dom.image.addEventListener('dblclick', function (event) {
         event.preventDefault();
-        thisBook.dom.image.classList.toggle('favorite');
+        utils.toggleFavourite(thisBook.dom.image,thisBook.data.id,favoriteBooks);
+        //thisBook.dom.image.classList.toggle('favorite');
       });
     }
   }
