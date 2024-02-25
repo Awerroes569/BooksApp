@@ -24,9 +24,10 @@
   class Book {
     constructor(data) {
       const thisBook = this;
-      thisBook.data = utils.createDeeperClone(dataSource.books[data]); 
+      thisBook.data = utils.createDeepClone(dataSource.books[data]); 
       thisBook.renderInMenu();
       thisBook.getElements();
+      thisBook.initActions();
 
     }
 
@@ -49,8 +50,15 @@
       thisBook.dom.image = element.querySelector(select.book.image);
       thisBook.dom.name = element.querySelector(select.book.name);
       thisBook.dom.price = element.querySelector(select.book.price);
-      thisBook.dom.rating = element.querySelector(select.book.rating);
-        
+      thisBook.dom.rating = element.querySelector(select.book.rating);   
+    }
+
+    initActions() {
+      const thisBook = this;
+      thisBook.dom.image.addEventListener('dblclick', function (event) {
+        event.preventDefault();
+        thisBook.dom.image.classList.toggle('favorite');
+      });
     }
   }
   const app = {

@@ -6,6 +6,6 @@ utils.createDOMFromHTML = function(htmlString) {
   return div.firstChild;
 };
 
-utils.createDeeperClone = function (obj) {
+utils.createDeepClone = function (obj) {
   return JSON.parse(JSON.stringify(obj));
 };
