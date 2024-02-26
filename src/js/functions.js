@@ -19,3 +19,15 @@ utils.toggleFavourite = function (clickedElement, id,array) {
     clickedElement.classList.add('favorite');
   }
 };
+
+utils.toggleFavourite2 = function (clickedElement, array) {
+  let id = clickedElement.getAttribute('data-id');
+  if (array.includes(id)) {
+    array.splice(array.indexOf(id), 1);
+    clickedElement.classList.remove('favorite');
+  } else {
+    array.push(id);
+    clickedElement.classList.add('favorite');
+  }
+  console.log('current array:', array);
+};

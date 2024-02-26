@@ -14,6 +14,7 @@
       name: '.book__name',
       price: '.book__price',
       rating: '.book__rating',
+      id: 'a',
     },
   };
     
@@ -29,7 +30,7 @@
       thisBook.data = utils.createDeepClone(dataSource.books[data]); 
       thisBook.renderInMenu();
       thisBook.getElements();
-      thisBook.initActions();
+      //thisBook.initActions();
 
     }
 
@@ -49,18 +50,23 @@
       const thisBook = this;
       const element=thisBook.element;
       thisBook.dom = {};
+      thisBook.dom.wrapper = element;
+      thisBook.dom.books = document.querySelector(select.containerOf.bookList);
       thisBook.dom.image = element.querySelector(select.book.image);
       thisBook.dom.name = element.querySelector(select.book.name);
       thisBook.dom.price = element.querySelector(select.book.price);
-      thisBook.dom.rating = element.querySelector(select.book.rating);   
+      thisBook.dom.rating = element.querySelector(select.book.rating);
+      
     }
 
     initActions() {
-      const thisBook = this;
-      thisBook.dom.image.addEventListener('dblclick', function (event) {
+      const thisBook = this; 
+      thisBook.dom.books.addEventListener('dblclick', function (event) {
         event.preventDefault();
+        let clickedElement = event.target.querySelector(select.book.id).getAttribute('data-id');//.innerHTML;
         utils.toggleFavourite(thisBook.dom.image,thisBook.data.id,favoriteBooks);
         //thisBook.dom.image.classList.toggle('favorite');
+        console.log('clickedElement:', clickedElement);
       });
     }
   }
@@ -86,6 +92,26 @@
       thisApp.initData();
       //thisApp.initMenu();
       thisApp.initBooks();
+      thisApp.initActions();
+    },
+
+    initActions: function () {
+
+      console.log('app.initActions');
+      
+      document.querySelector(select.containerOf.bookList).addEventListener('dblclick', function (event) {
+        event.preventDefault();
+        let clickedElement = event.target.parentNode.parentNode;
+        console.log('target:', event.target);
+        console.log('clickedElement:', clickedElement);
+        if (clickedElement.classList.contains('book__image')) {
+  
+          console.log('inside if clickedElement:', clickedElement);
+          utils.toggleFavourite2(clickedElement, favoriteBooks);
+          //thisBook.dom.image.classList.toggle('favorite');
+
+        }
+      });
     },
   };
 
