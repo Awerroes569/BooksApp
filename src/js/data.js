@@ -56,4 +56,15 @@ dataSource.books = [
       nonFiction: false
     }
   },
+  {
+    id: 6,
+    name: 'Of Mice and Men 2',
+    image: 'images/books/5.jpg',
+    rating: 3.6,
+    price: 45,
+    details: {
+      adults: true,
+      nonFiction: true,
+    }
+  },
 ];
