@@ -1,3 +1,7 @@
+//const { breakStr } = require("prelude-ls");
+
+//const { cos } = require("prelude-ls");
+
 {
   'use strict';
   //"test:scss": "stylelint --fix src/sass/", REMOVED TEMPORARY FROM PACKAGE.JSON
@@ -16,6 +20,7 @@
       price: '.book__price',
       rating: '.book__rating',
       id: 'a',
+      bar: '.book__rating__fill',
     },
   };
     
@@ -33,6 +38,17 @@
       thisBook.data = utils.createDeepClone(dataSource.books[data]); 
       thisBook.renderInMenu();
       thisBook.getElements();
+      thisBook.stylingBar();
+    }
+
+    stylingBar() {
+      const thisBook = this;
+      const rating = thisBook.data.rating;
+      const bar = thisBook.dom.bar;
+      console.log('bar:', bar);
+      bar.setAttribute('style', `background: ${utils.whatBackground(rating)}; width: ${utils.whatLenght(rating)};`);
+      //bar.style.background = utils.whatBackground(rating);
+      //bar.style.width = utils.whatLenght(rating);
     }
 
     renderInMenu() {
@@ -56,7 +72,10 @@
       thisBook.dom.image = element.querySelector(select.book.image);
       thisBook.dom.name = element.querySelector(select.book.name);
       thisBook.dom.price = element.querySelector(select.book.price);
-      thisBook.dom.rating = element.querySelector(select.book.rating);      
+      thisBook.dom.rating = element.querySelector(select.book.rating);
+      console.log('thisBook.dom.rating:', thisBook.dom.rating);
+      thisBook.dom.bar = element.querySelector(select.book.bar);
+      console.log('thisBook.dom.bar:', thisBook.dom.bar);
     }
   }
   const app = {
